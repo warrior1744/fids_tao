@@ -1,0 +1,220 @@
+@font-face {
+    font-family: "Roboto";
+    src: url("../Roboto/Roboto-Bold.ttf");
+    src: url("../Roboto/Roboto-Bold.ttf") format("ttf"),
+    /* url("CustomFont.otf") format("opentype"),
+    url("CustomFont.svg#filename") format("svg"); */
+    }
+
+
+
+body {
+   
+    background-color: black;
+    /* background: url("../images/fids_background.png") no-repeat fixed; */
+    /* -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover; */
+    font-family: 'Roboto', Arial, sans-serif;
+}
+
+
+/* .stripedTable tbody tr:nth-child(even){
+
+    background-color: red !important; 
+} */
+
+
+#banner{
+    overflow: hidden;
+    width: auto;
+    height: 6vw;
+    color: white;
+    background-color: rgb(59, 57, 57);
+    text-align: left;
+  
+}
+
+#banner h3{
+    line-height: 2.1vw !important;
+    /* box-sizing: border-box !important; */
+    font-size: 5vw;
+    position: relative;
+    left: 7vw;
+    top: 1vh;
+}
+
+#dep_img{
+    position: absolute;
+    width: 6vw;
+    height: auto;
+   
+    /* padding-left: 4vw; */
+    
+}
+
+
+#logo_img{
+    position: absolute;
+    right: 3vw;
+    top: 0.3vh;
+    width: 10vw;
+    height: auto;
+    /* padding-right: 4vw; */
+    /* padding-left: 4vw; */
+    
+}
+
+/* .fidsRow{
+
+ padding-top: 0 !important;
+ padding-bottom: 0 !important;
+ margin: 0;
+} */
+#fidsTable{
+    table-layout: fixed !important;
+}
+
+#fidsTable tr th:not(#banner){
+    line-height: 2.1vw !important;
+    background-color: black;
+    word-wrap: break-word;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 2.1vw; 
+    padding:0.1%;
+}
+
+#fidsTable tr td:not(.fidsRemarks_td):not(.fidsDestination_td) {
+    text-align: center;
+    vertical-align: middle;
+    border-spacing: 0 0.2vh;
+    border-collapse: collapse;
+    font-size: 2.5vw;
+    color: white;
+    z-index: 1;
+}
+
+#fidsTable tr td{
+    padding-top: 0.2vh !important;
+    padding-bottom: 0.2vh !important;
+    max-width: 100%;
+    height: auto;
+}
+/* font-size: max(30vw, 30px); */
+
+#th_time{
+    /* word-wrap: break-word !important;
+    padding-left: 0.4vw !important;
+    padding-right: 0.4vw !important; */
+}
+
+#th_destination{
+    text-align: left !important;
+    padding-left: 1vw !important;
+    /* word-wrap: break-word !important;
+    padding-left: 7vw !important;
+    padding-right: 7vw !important; */
+}
+
+#th_airlines{
+
+}
+
+#th_flightno{
+    /* word-wrap: break-word !important;
+    padding-left: 1.5vw !important;
+    padding-right: 1.5vw !important; */
+}
+
+#th_gate{
+   
+}
+
+#th_remarks{
+    /* word-wrap: break-word !important;
+    padding-left: 3vw !important;
+    padding-right: 3vw !important; */
+}
+
+#th_page{
+
+}
+
+.fidsTime_td{
+    white-space: nowrap;
+}
+
+.fidsDestination_td{
+    white-space: nowrap;
+    /* max-height: 2.0vh; */
+    text-align: left !important;
+    font-size: 2.6vw;
+    overflow-x: hidden;
+    color: orange !important;
+    padding-left: 0.3vw !important;
+    padding-right: 0.3vw !important;
+}
+
+
+.fidAirlines_td{
+    white-space: nowrap;
+}
+
+.fidsFlightNo_td{
+    white-space: nowrap;
+}
+
+.fidsGate_td{
+    white-space: nowrap;
+    padding: 0px!important;
+    text-align: right !important ;
+    vertical-align:  middle !important;
+    color: black !important;
+    background-color: black !important;
+}
+
+.fidsGate_span{
+    padding: 0px 0.5vw 0px 4vw!important;
+    font-size: 2.8vw !important;
+}
+
+.fidsRemarks_td{
+    word-wrap: break-word !important;
+    text-align: center;
+    line-height: 2.1vw !important;
+    vertical-align: middle;
+    border-spacing: 0px 0px !important;
+    border-collapse: collapse;
+    color: white;
+    max-width: 85px;
+    padding-left: 1vw !important;
+    padding-right: 1vw !important;
+    font-size: 2.2vw !important;
+}
+
+.fidsOther_td{
+    color: red !important;
+}
+
+.remark-blue{
+    background-color: rgb(43, 43, 134) !important;
+}
+
+.remark-green{
+    background-color: rgb(9, 97, 9) !important;
+}
+
+.remark-red{
+    background-color: rgb(145, 11, 11) !important;
+}
+
+.remark-purple{
+    background-color: purple !important;
+}
+
+
+.table-striped > tbody > tr:nth-child(2n+1) > td :not(.fidsRemarks_td):not(.badge){
+    background-color: rgb(88, 84, 84) !important;
+ }
