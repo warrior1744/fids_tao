@@ -1,4 +1,5 @@
 <?php
+include("timeDiff.php");
 //Edit by : Jim Chang
 //==================================================================================
  /*KEYv6, v4對照表( 
@@ -66,7 +67,7 @@ define("KEYv4",  array('terminal', 'category', 'IATA','airline_cht', 'flight.No'
 'destination_IATA', 'destination_eng', 'destination_cht', 'flight_status', 'airplane_model',
 'othersites', 'othersites_eng', 'othersites_cht', 'conveyor', 'counter'));
 $reg_cht_eng = '~(?<!\p{Latin})(?=\p{Latin})|(?<!\p{Han})(?=\p{Han})|(?<![0-9])(?=[0-9])~u';
-error_reporting(0);
+// error_reporting(0);
 try{
   $key_length = 0;
   $array_combine;
@@ -83,11 +84,13 @@ try{
       $encoding  = mb_detect_encoding($content, array('GB2312','GBK','UTF-16','UCS-2','UTF-8','BIG-5','ASCII'));
       $result = mb_convert_encoding($content, 'UTF-8' ,'BIG-5');
    }
+
 $new_data_array = array();
 $data = preg_split("/((\r?\n)|(\r\n?))/", $result);
-$today = new DateTime("now", new DateTimezone('Asia/Taipei'));
-$today_formatted = $today -> format('Y/m/d H:i:s');//output  2021/12/15 16:01:09
-$today_object = datetime::createfromformat('Y/m/d H:i:s', $today_formatted);
+
+$off = new timeDiff();
+$act = new timeDiff();
+
 foreach($data as $line)
 {
   $item_array = explode(',', $line); 
@@ -95,17 +98,20 @@ foreach($data as $line)
   { 
     $item_key_value = array_combine($array_combine,  $item_array);
     $item_official_dateTime_object = datetime::createfromformat('Y/m/d H:i:s',  $item_key_value['official_date'].' '.$item_key_value['official_time']);//output an object 2021/12/15 16:01:09
-    $item_official_diff = $today_object->diff($item_official_dateTime_object);
-    $item_official_diff_min = intval($item_official_diff->format('%r%i'));//output between -59 ~ 59
-    $item_official_diff_hour = intval($item_official_diff->format('%r%h'));//output between -24 ~ 24
-    $item_official_diff_day = intval($item_official_diff->format('%r%a'));//output number of days
+    $off->setTime_diff($item_official_dateTime_object);
+    $item_official_diff = $off->getTime_diff();
+    $item_official_diff_min = $off->getMinDiff();
+    $item_official_diff_hour = $off->getHourDiff();
+    $item_official_diff_day = $off->getDayDiff();
     $item_official_diff_hours = 0;
 
     $item_actual_dateTime_object = datetime::createfromformat('Y/m/d H:i:s',  $item_key_value['actual_date'].' '.$item_key_value['actual_time']);//output an object 2021/12/15 16:01:09
-    $item_actual_diff = $today_object->diff($item_actual_dateTime_object);
-    $item_actual_diff_min = intval($item_actual_diff->format('%r%i'));//output between -59 ~ 59
-    $item_actual_diff_hour = intval($item_actual_diff->format('%r%h'));//output between -24 ~ 24
-    $item_actual_diff_day = intval($item_actual_diff->format('%r%a'));//output number of days
+
+    $act->setTime_diff($item_actual_dateTime_object);
+    $item_actual_diff = $act->getTime_diff();
+    $item_actual_diff_min = $act->getMinDiff();
+    $item_actual_diff_hour =$act->getHourDiff();
+    $item_actual_diff_day = $act->getDayDiff();
     $item_actual_diff_hours = 0;
 
     if($item_official_diff_day >= 0)
@@ -120,7 +126,7 @@ foreach($data as $line)
     $item_official_diff_min_sum = $item_official_diff_hours * 60 + $item_official_diff_min;//put this item into the array and give it a key, later then sort out with these values
     $item_actual_diff_min_sum = $item_actual_diff_hours * 60 + $item_actual_diff_min;
 
-    if($item_diff_min_sum < 720 && $item_official_diff_min_sum >= -10 && $item_actual_diff_min_sum >= -60)
+    if($item_official_diff_min_sum < 720 && $item_official_diff_min_sum >= -10 && $item_actual_diff_min_sum >= -60)
     { 
       $item_airline_substr = mb_substr($item_key_value['airline_cht'] ,0 ,4 ,"UTF-8" );//substr airline chinese words
       $item_official_time_substr = substr($item_key_value['official_time'] ,0 ,5);//substr official time ex: 10:35:00 to 10:35
@@ -135,7 +141,7 @@ foreach($data as $line)
                               'actual_time' => $item_actual_time_substr,
                               'flight_status' => $item_flight_status_replace_space,
                               'destination_eng' => $item_destination_eng_replace,
-                              'min_diff' => $item_diff_min_sum);
+                              'min_diff' => $item_official_diff_min_sum);
       $replaced = array_replace($item_key_value, $replacements);
       $flight_status = trim($item_key_value['flight_status']);
       if( !(($flight_status != '取消Cancelled') && ctype_space($item_key_value['gate']))){

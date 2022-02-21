@@ -1,5 +1,7 @@
-$(document).ready(function(){
 
+
+
+$(document).ready(function(){
     var FREQ = 16000;  //default is 16000
     var FREQ2 = 8000;
 
