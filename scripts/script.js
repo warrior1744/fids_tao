@@ -2,6 +2,7 @@
 
 
 $(document).ready(function(){
+  "use strict";
     var FREQ = 16000;  //default is 16000
     var FREQ2 = 8000;
 
@@ -51,6 +52,7 @@ $(document).ready(function(){
                           let jsonObj = (page =='Page 1')? json.page1: json.page2; let chg = 0;
                           $.each(jsonObj, function(){
                             let newRemarkClass='';
+                            let $othersites='';
                             if(this['flight_status'] == '出發Departed'){this['flight_status'] = '出發 <br> Departed'; newRemarkClass = 'remark-green';
                             }else if(this['flight_status'] == '客機載貨Cargo Only'){this['flight_status'] = '客機載貨 <br> Cargo Only'; newRemarkClass = 'remark-blue';
                             }else if(this['flight_status'] == '準時On Time'){this['flight_status'] = '準時 <br> On Time'; newRemarkClass = 'remark-blue';
