@@ -35,16 +35,3 @@ Phase 3: Data Consistency & Improvements
 1. Show other destination info on the column, recommend using set timeout function for 4 seconds completed!
 2. show extra information on the left space of Gate column if needed  cancelled!
 3. Show empty info when there is only one page of data (<33>) finished!
-4. 
-
-
-Progress: 70%
-
-=================================================================================
-Phase 4: Installation
-
-1. 
-
-Progress: 0%
-
-=================================================================================
